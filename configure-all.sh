@@ -16,6 +16,12 @@ fi
 ARGS="$ARGS --with-tcl --with-libxml --with-openssl"
 DEBUG_ARGS="--enable-depend --enable-cassert --enable-debug"
 CFLAGS="-O0 -g -fno-omit-frame-pointer"
+
+# openSUSE and SUSE have tclConfig.sh in /usr/lib64 for x86_64 machines
+if [ -f "/etc/SuSE-release" ] && [ "$(uname -m)" == 'x86_64' ]; then
+	ARGS="$ARGS --with-tclconfig=/usr/lib64"
+fi
+
 if (which ccache && which clang ) > /dev/null
 then
     ARGS="$ARGS CC='ccache clang -Qunused-arguments -fcolor-diagnostics'"
