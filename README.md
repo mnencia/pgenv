@@ -26,9 +26,14 @@ Initial postgresql checkout
 
     git clone git://git.postgresql.org/git/postgresql.git $HOME/pgsql/master
 
-Install tcl-dev, which is necessary for configure-all.sh
+In Ubuntu, install tcl-dev, which is necessary for configure-all.sh
 
     sudo apt-get install tcl-dev
+
+If you use openSUSE, you must install these packages:
+
+    sudo zypper in -t pattern devel_C_C++
+    sudo zypper in tcl-devel libxml2-devel readline-devel libopenssl-devel
 
 Build and install the development head version
 
