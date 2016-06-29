@@ -4,11 +4,11 @@ This is a personal collection of shell scripts to easily develop and test severa
 
 ## Install
 
-Checkout the project in @$HOME/pgsql@
+Checkout the project in `$HOME/pgsql`
 
     git clone https://github.com/mnencia/pgenv.git $HOME/pgsql
 
-Add the following lines to @~/.bashrc@
+Add the following lines to `~/.bashrc`
 
 
     # pgenv
@@ -77,7 +77,7 @@ Upgrade only one version (numeric version or master)
 
 ### pgworkon
 
-*Usage: pgworkon VERSION [COMMAND]
+*Usage: pgworkon VERSION [COMMAND]*
 
 set the environment to use the specific version, if a *COMMAND* is specified, execute it
 in the target environment but leave the current environment untouched
