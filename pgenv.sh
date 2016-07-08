@@ -140,6 +140,7 @@ EOF
         fi
         if [ ${PG_VERSION/./} -ge 90 ]
         then
+            echo "hot_standby = on" >> "$PGDATA/postgresql.conf"
             echo "max_wal_senders = 10" >> "$PGDATA/postgresql.conf"
         fi
         if [ ${PG_VERSION/./} -ge 94 ]
