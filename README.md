@@ -36,6 +36,10 @@ If you use openSUSE, you must install these packages:
     sudo zypper in -t pattern devel_C_C++
     sudo zypper in tcl-devel libxml2-devel readline-devel libopenssl-devel
 
+If you use Archlinux, please be sure that these packages are installed:
+
+    sudo pacman -S tcl libxml2 openssl bison flex base-devel
+
 Build and install the development head version
 
     cd ~/pgsql
