@@ -7,9 +7,9 @@ case "$1" in
     echo "ERROR: missing argument" >&2
     exit 1
     ;;
-  master|9.6)
+  master|10)
     BRANCH=master
-    VER=9.6
+    VER=10
     ;;
   *)
     BRANCH="REL${1/./_}_STABLE"
