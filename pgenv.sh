@@ -37,7 +37,7 @@ pgworkon() {
     local PG_DIR="$HOME/.pgenv"
     local SOURCE_DIR="$HOME/pgsql"
     local CURRENT_DEVEL=10
-    local BASE_PORT=54
+    local BASE_PORT=5400
 
     if [ -n "$2" ]
     then
@@ -68,7 +68,7 @@ pgworkon() {
       dev)
         PG_BRANCH=dev
         PG_VERSION=$CURRENT_DEVEL
-        BASE_PORT=64
+        BASE_PORT=6400
         ;;
       master|$CURRENT_DEVEL)
         PG_BRANCH=master
@@ -79,6 +79,12 @@ pgworkon() {
         PG_VERSION="$1"
         ;;
     esac
+
+    PG_VERSION_NUM=${PG_VERSION/./}
+    if [ ${PG_VERSION%%.*} -ge 10 ]
+    then
+        PG_VERSION_NUM=${PG_VERSION_NUM}0
+    fi
 
     local DIR="$SOURCE_DIR/$PG_BRANCH"
     local BINDIR="$PG_DIR/versions/$PG_BRANCH/bin"
@@ -96,7 +102,7 @@ pgworkon() {
     export PGDATA="$DATADIR"
     export PGDATABASE="postgres"
     export PGUSER="postgres"
-    export PGPORT=${BASE_PORT}${PG_VERSION/./}
+    export PGPORT=$((BASE_PORT + PG_VERSION_NUM))
     export PGHOST=/tmp
 
     if which dpkg-architecture > /dev/null; then
@@ -112,7 +118,7 @@ pgworkon() {
         pgstop
         rm -fr "$PGDATA"
         mkdir -p "$PGDATA"
-        initdb -U postgres $([ ${PG_VERSION/./} -ge 93 ] && echo '-k')
+        initdb -U postgres $([ ${PG_VERSION_NUM} -ge 93 ] && echo '-k')
         cat <<-EOF >> "$PGDATA/postgresql.conf"
 archive_mode = on
 archive_command = 'cd .'
@@ -130,24 +136,24 @@ log_checkpoints = on
 log_temp_files = 0
 log_line_prefix = '%t [%p]: [%l-1] user=%u,db=%d '
 EOF
-        if [ ${PG_VERSION/./} -ge 90 ] && [ ${PG_VERSION/./} -lt 95 ]
+        if [ ${PG_VERSION_NUM} -ge 90 ] && [ ${PG_VERSION_NUM} -lt 95 ]
         then
             echo "wal_level = hot_standby" >> "$PGDATA/postgresql.conf"
-        elif [ ${PG_VERSION/./} -ge 95 ]
+        elif [ ${PG_VERSION_NUM} -ge 95 ]
         then
             echo "wal_level = logical" >> "$PGDATA/postgresql.conf"
             echo "track_commit_timestamp=on" >> "$PGDATA/postgresql.conf"
         fi
-        if [ ${PG_VERSION/./} -ge 90 ]
+        if [ ${PG_VERSION_NUM} -ge 90 ]
         then
             echo "hot_standby = on" >> "$PGDATA/postgresql.conf"
             echo "max_wal_senders = 10" >> "$PGDATA/postgresql.conf"
         fi
-        if [ ${PG_VERSION/./} -ge 94 ]
+        if [ ${PG_VERSION_NUM} -ge 94 ]
         then
             echo "max_replication_slots = 10" >> "$PGDATA/postgresql.conf"
         fi
-        if [ ${PG_VERSION/./} -le 94 ]
+        if [ ${PG_VERSION_NUM} -le 94 ]
         then
             echo "checkpoint_segments = 32" >> "$PGDATA/postgresql.conf"
         fi
