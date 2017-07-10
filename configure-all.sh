@@ -9,8 +9,8 @@ then
     ARGS="$ARGS --with-libraries=/opt/local/lib --with-includes=/opt/local/include"
 elif which brew > /dev/null
 then
-    ARGS="$ARGS --with-libraries=/usr/local/lib:/usr/local/opt/openssl/lib:/usr/local/opt/readline/lib"
-    ARGS="$ARGS --with-includes=/usr/local/include:/usr/local/opt/openssl/include:/usr/local/opt/readline/include"
+    ARGS="$ARGS --with-libraries=/usr/local/opt/openssl/lib:/usr/local/opt/readline/lib"
+    ARGS="$ARGS --with-includes=/usr/local/opt/openssl/include:/usr/local/opt/readline/include"
 fi
 
 ARGS="$ARGS --with-tcl --with-libxml --with-openssl"
