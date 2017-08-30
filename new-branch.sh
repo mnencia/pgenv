@@ -11,6 +11,10 @@ case "$1" in
     BRANCH=master
     VER=11
     ;;
+  1*)
+    BRANCH="REL_${1}_STABLE"
+    VER="$1"
+    ;;
   *)
     BRANCH="REL${1/./_}_STABLE"
     VER="$1"

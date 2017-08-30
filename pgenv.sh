@@ -74,6 +74,10 @@ pgworkon() {
         PG_BRANCH=master
         PG_VERSION=$CURRENT_DEVEL
         ;;
+      1*)
+        PG_BRANCH="REL_${1}_STABLE"
+        PG_VERSION="$1"
+        ;;
       *)
         PG_BRANCH="REL${1/./_}_STABLE"
         PG_VERSION="$1"
