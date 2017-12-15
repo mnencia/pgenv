@@ -9,9 +9,9 @@ then
     ARGS="$ARGS --with-libraries=/opt/local/lib --with-includes=/opt/local/include"
 elif which brew > /dev/null
 then
-    export PATH="/usr/local/opt/tcl-tk/bin:$PATH"
-    ARGS="$ARGS --with-libraries=/usr/local/opt/openssl/lib:/usr/local/opt/readline/lib:/usr/local/opt/tcl-tk/lib"
-    ARGS="$ARGS --with-includes=/usr/local/opt/openssl/include:/usr/local/opt/readline/include:/usr/local/opt/tcl-tk/include"
+    ARGS="$ARGS --with-tclconfig=/usr/local/opt/tcl-tk/lib"
+    ARGS="$ARGS --with-libraries=/usr/local/opt/openssl/lib:/usr/local/opt/readline/lib"
+    ARGS="$ARGS --with-includes=/usr/local/opt/openssl/include:/usr/local/opt/readline/include"
 fi
 
 ARGS="$ARGS --with-tcl --with-libxml --with-openssl"
