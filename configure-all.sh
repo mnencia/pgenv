@@ -16,6 +16,13 @@ fi
 
 ARGS="$ARGS --with-tcl --with-libxml --with-openssl"
 DEBUG_ARGS="--enable-depend --enable-cassert --enable-debug"
+
+# Enable tap tests if IPC::Run is available
+if [ -n "$(perldoc -lm IPC::Run)" ]
+then
+    DEBUG_ARGS="$DEBUG_ARGS --enable-tap-tests"
+fi
+
 CFLAGS="-O0 -g -fno-omit-frame-pointer"
 
 # openSUSE and SUSE have tclConfig.sh in /usr/lib64 for x86_64 machines
