@@ -7,7 +7,7 @@ case "$1" in
     echo "ERROR: missing argument" >&2
     exit 1
     ;;
-  master|11)
+  master|12)
     BRANCH=master
     VER=11
     ;;

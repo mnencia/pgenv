@@ -36,7 +36,7 @@ fi
 pgworkon() {
     local PG_DIR="$HOME/.pgenv"
     local SOURCE_DIR="$HOME/pgsql"
-    local CURRENT_DEVEL=11
+    local CURRENT_DEVEL=12
     local BASE_PORT=5400
 
     if [ -n "$2" ]
