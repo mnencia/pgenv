@@ -5,7 +5,7 @@ trap 'echo ERROR: installing $a FAILED!' ERR
 
 cd ~/pgsql
 
-for a in dev master $(ls -rd REL*)
+for a in dev master $(ls -rd *REL*)
 do
     # if the directory doesn't exist skip it
     [ -d $a ] || continue

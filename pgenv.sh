@@ -1,4 +1,3 @@
-
 pgstatus() {
     local PG_DIR="$HOME/.pgenv"
     local versiondir version bindir datadir
@@ -36,7 +35,7 @@ fi
 pgworkon() {
     local PG_DIR="$HOME/.pgenv"
     local SOURCE_DIR="$HOME/pgsql"
-    local CURRENT_DEVEL=12
+    local CURRENT_DEVEL=13
     local BASE_PORT=5400
 
     if [ -n "$2" ]
