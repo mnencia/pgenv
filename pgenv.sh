@@ -19,12 +19,17 @@ pgstatus() {
 _pgenv_hook() {
     if [[ -n "$PG_VERSION" ]]
     then
-	if [[ "$PG_BRANCH" = dev ]]
-	then
+        if [[ "$PG_BRANCH" = dev ]]
+        then
             echo -n "{pgDEV} "
-	else
-            echo -n "{pg$PG_VERSION} "
-	fi
+        else
+            if [[ "$PG_BRANCH" =~ ^2Q ]]
+            then
+                echo -n "{2Q$PG_VERSION} "
+            else
+                echo -n "{pg$PG_VERSION} "
+            fi
+        fi
     fi
 }
 
@@ -72,6 +77,16 @@ pgworkon() {
       master|$CURRENT_DEVEL)
         PG_BRANCH=master
         PG_VERSION=$CURRENT_DEVEL
+        ;;
+      2[Qq]1*)
+        PG_VERSION="${1#2[Qq]}"
+        PG_BRANCH="2QREL_${PG_VERSION}_STABLE"
+        BASE_PORT=7400
+        ;;
+      2[Qq]*)
+        PG_VERSION="${1#2[Qq]}"
+        PG_BRANCH="2QREL${PG_VERSION/./_}_STABLE"
+        BASE_PORT=7400
         ;;
       1*)
         PG_BRANCH="REL_${1}_STABLE"
