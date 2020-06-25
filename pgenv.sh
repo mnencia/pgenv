@@ -136,7 +136,7 @@ pgworkon() {
         pgstop
         rm -fr "$PGDATA"
         mkdir -p "$PGDATA"
-        initdb -U postgres $([ ${PG_VERSION_NUM} -ge 93 ] && echo '-k')
+        initdb -U postgres $([ ${PG_VERSION_NUM} -ge 93 ] && echo '-k') "$@"
         cat <<-EOF >> "$PGDATA/postgresql.conf"
 archive_mode = on
 archive_command = 'cd .'
